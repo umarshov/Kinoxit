@@ -3,372 +3,506 @@
 <html lang="ru">
 <head>
 <meta name="google-site-verification" content="nwtM3Y33_krMj0Du4Fo878CM8XQUEDTT1uXe6MzZ27g" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0b0b0e">
-<meta name="description" content="KinoXit — каталог фильмов: боевики, комедии, криминал и фантастика.">
-<meta name="google-site-verification" content="nwtM3Y33_krMj0Du4Fo878CM8XQUEDTT1uXe6MzZ27g">
-<title>KinoXit</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0b0e">
+  <meta name="description" content="KinoXit — каталог кино с поиском, жанрами и встроенным видеоплеером.">
+  <meta name="google-site-verification" content="nwtM3Y33_krMj0Du4Fo878CM8XQUEDTT1uXe6MzZ27g">
+  <title>KinoXit — смотреть кино</title>
 
-<style>
-:root {
-  --bg:#0b0b0e;
-  --panel:#15151b;
-  --red:#ff303b;
-  --text:#f6f6f8;
-  --muted:#a4a4b0;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Arial,Helvetica,sans-serif;
-}
-header {
-  position:sticky;
-  top:0;
-  z-index:5;
-  background:#101014f5;
-  border-bottom:1px solid #292930;
-  padding:17px 5%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-}
-.logo {
-  color:white;
-  font-size:27px;
-  font-weight:900;
-  text-decoration:none;
-}
-.logo b { color:var(--red); }
-nav a {
-  color:#ddd;
-  text-decoration:none;
-  margin-left:18px;
-  font-size:14px;
-}
-.hero {
-  padding:65px 5% 35px;
-  background:radial-gradient(ellipse at top right,#491419 0%,#171015 38%,#0b0b0e 75%);
-}
-.hero small {
-  color:var(--red);
-  font-weight:bold;
-  letter-spacing:3px;
-}
-.hero h1 {
-  font-size:clamp(35px,6vw,66px);
-  line-height:1.05;
-  margin:17px 0;
-}
-.hero h1 span { color:var(--red); }
-.hero p {
-  color:var(--muted);
-  max-width:550px;
-  line-height:1.7;
-}
-main { padding:30px 5% 60px; }
-.toolbar {
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-bottom:28px;
-}
-input,select {
-  background:var(--panel);
-  color:white;
-  border:1px solid #363640;
-  border-radius:9px;
-  padding:13px 14px;
-  font-size:15px;
-  min-width:0;
-}
-input { flex:1; min-width:190px; }
-select { min-width:150px; }
-h2 { font-size:25px; margin:15px 0 22px; }
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(175px,1fr));
-  gap:22px;
-}
-.card {
-  min-width:0;
-  overflow:hidden;
-  border-radius:12px;
-  background:var(--panel);
-  border:1px solid #26262e;
-  cursor:pointer;
-  transition:transform .2s,border-color .2s;
-}
-.card:hover {
-  transform:translateY(-5px);
-  border-color:var(--red);
-}
-.poster {
-  width:100%;
-  aspect-ratio:2/3;
-  background:#202027;
-  overflow:hidden;
-}
-.poster img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.info { padding:13px; }
-.info h3 { margin:0 0 9px; font-size:17px; }
-.meta { color:var(--muted); font-size:13px; }
-.info p {
-  color:#c0c0ca;
-  font-size:13px;
-  line-height:1.5;
-}
-.tag {
-  display:inline-block;
-  background:#351519;
-  color:#ff9298;
-  padding:5px 9px;
-  border-radius:5px;
-  font-size:12px;
-}
-.empty { color:var(--muted); padding:25px 0; }
-footer {
-  border-top:1px solid #292930;
-  padding:25px 5%;
-  color:var(--muted);
-  text-align:center;
-  font-size:13px;
-}
-.modal {
-  position:fixed;
-  inset:0;
-  z-index:10;
-  background:#000d;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  overflow-y:auto;
-}
-.modal.open { display:flex; }
-.dialog {
-  position:relative;
-  width:100%;
-  max-width:700px;
-  background:#17171e;
-  border:1px solid #35353e;
-  border-radius:16px;
-  padding:24px;
-  display:grid;
-  grid-template-columns:minmax(120px,220px) 1fr;
-  gap:24px;
-  margin:auto;
-}
-.dialog-poster {
-  width:100%;
-  border-radius:9px;
-  aspect-ratio:2/3;
-  object-fit:cover;
-  background:#25252c;
-}
-.dialog h2 { margin-top:8px; }
-.dialog p { color:#c5c5cf; line-height:1.7; }
-.close {
-  position:absolute;
-  right:12px;
-  top:10px;
-  background:#303039;
-  color:white;
-  border:0;
-  border-radius:8px;
-  padding:9px 12px;
-  cursor:pointer;
-  font-size:18px;
-}
-.btn {
-  display:inline-block;
-  background:var(--red);
-  color:white;
-  border:0;
-  border-radius:8px;
-  padding:12px 16px;
-  margin-top:8px;
-  text-decoration:none;
-  cursor:pointer;
-  font-weight:bold;
-}
-.note { font-size:12px; color:var(--muted); }
-@media(max-width:520px) {
-  header { padding:15px 4%; }
-  nav a { margin-left:8px; font-size:12px; }
-  .hero { padding:45px 5% 25px; }
-  main { padding:25px 4% 45px; }
-  .grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-  .dialog { grid-template-columns:1fr; gap:15px; padding:20px; }
-  .dialog-poster { max-width:180px; }
-  .dialog-content { padding-top:10px; }
-}
-</style>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0b0e;
+      --panel: #17171d;
+      --red: #f5223d;
+      --muted: #a7a7b4;
+      --border: #292932;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #fff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    button, input, select { font: inherit; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(11,11,14,.96);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .logo {
+      color: white;
+      font-size: 27px;
+      font-weight: 900;
+      text-decoration: none;
+      letter-spacing: -1px;
+    }
+
+    .logo b { color: var(--red); }
+
+    .header-label {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .hero {
+      padding: 55px 5% 35px;
+      background:
+        radial-gradient(ellipse at 80% 0%, #52121e 0%, transparent 45%),
+        linear-gradient(120deg, #17171d, #0b0b0e 75%);
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 5vw, 54px);
+    }
+
+    .hero h1 span { color: var(--red); }
+
+    .hero p {
+      max-width: 600px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    main { padding: 28px 5% 55px; }
+
+    .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .tools input, .tools select {
+      background: var(--panel);
+      color: white;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 13px;
+      min-width: 180px;
+    }
+
+    .tools input { flex: 1; }
+
+    h2 { font-size: 24px; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform .2s, border-color .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--red);
+    }
+
+    .poster {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      background: #22222a;
+      overflow: hidden;
+    }
+
+    .poster img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .info { padding: 13px; }
+
+    .info h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .meta, .description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      background: #35131b;
+      color: #ff7183;
+      border-radius: 5px;
+      padding: 5px 8px;
+      font-size: 12px;
+    }
+
+    .empty {
+      color: var(--muted);
+      padding: 25px 0;
+    }
+
+    footer {
+      text-align: center;
+      border-top: 1px solid var(--border);
+      padding: 25px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+      overflow-y: auto;
+      background: rgba(0,0,0,.88);
+      padding: 25px 12px;
+    }
+
+    .modal.open { display: block; }
+
+    .modal-box {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #15151b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .modal-top h2 { margin: 5px 0 15px; }
+
+    .close {
+      border: 0;
+      border-radius: 8px;
+      background: #292932;
+      color: white;
+      padding: 9px 13px;
+      cursor: pointer;
+    }
+
+    .player {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #050505;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 15px 0;
+    }
+
+    .player iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .player-message {
+      display: flex;
+      height: 100%;
+      min-height: 180px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 25px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .primary {
+      background: var(--red);
+      color: white;
+      border: 0;
+      border-radius: 8px;
+      padding: 12px 17px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .small-note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 520px) {
+      header { padding: 14px 4%; }
+      .hero { padding: 38px 4% 25px; }
+      main { padding: 22px 4% 40px; }
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .info { padding: 10px; }
+      .modal-box { padding: 13px; }
+      .header-label { display: none; }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-  <a class="logo" href="#">KINO<b>XIT</b></a>
-  <nav>
-    <a href="#">Главная</a>
-    <a href="#catalog">Фильмы</a>
-  </nav>
-</header>
+  <header>
+    <a class="logo" href="#">KINO<b>XIT</b></a>
+    <span class="header-label">Твой каталог кино</span>
+  </header>
 
-<section class="hero">
-  <small>ТВОЙ МИР КИНО</small>
-  <h1>Найди свой<br><span>КИНОХИТ</span></h1>
-  <p>Выбирай фильмы по жанру, открывай описание и находи варианты легального просмотра.</p>
-  <a class="btn" href="#catalog">Смотреть каталог</a>
-</section>
+  <section class="hero">
+    <h1>Смотри кино на <span>KinoXit</span></h1>
+    <p>Выбирай фильм, находи любимые жанры и смотри доступные видео прямо на сайте.</p>
+  </section>
 
-<main id="catalog">
-  <h2>Популярные фильмы</h2>
+  <main>
+    <h2>Каталог фильмов</h2>
 
-  <div class="toolbar">
-    <input id="search" type="search" placeholder="🔎 Найти фильм...">
-    <select id="genre">
-      <option value="">Все жанры</option>
-      <option value="Боевик">Боевики</option>
-      <option value="Комедия">Комедии</option>
-      <option value="Криминал">Криминал</option>
-      <option value="Фантастика">Фантастика</option>
-    </select>
-  </div>
+    <div class="tools">
+      <input id="search" type="search" placeholder="🔎 Найти фильм..." aria-label="Поиск фильма">
 
-  <div class="grid" id="films"></div>
-  <p class="empty" id="empty" hidden>Фильмы не найдены. Попробуй другой запрос.</p>
-</main>
+      <select id="genre" aria-label="Выбрать жанр">
+        <option value="">Все жанры</option>
+        <option value="Боевик">Боевик</option>
+        <option value="Комедия">Комедия</option>
+        <option value="Криминал">Криминал</option>
+        <option value="Фантастика">Фантастика</option>
+      </select>
+    </div>
 
-<footer>
-  <strong>KinoXit</strong> — каталог фильмов.<br>
-  Информация о фильмах представлена для ознакомления.
-</footer>
+    <div class="grid" id="films"></div>
+    <p class="empty" id="empty" hidden>Фильмы не найдены. Попробуй другой запрос.</p>
+  </main>
 
-<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-  <div class="dialog">
-    <button class="close" id="close" aria-label="Закрыть">✕</button>
-    <img class="dialog-poster" id="modalPoster" src="" alt="">
-    <div class="dialog-content">
-      <h2 id="modalTitle"></h2>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-top">
+        <h2 id="modalTitle">Название фильма</h2>
+        <button class="close" id="close" type="button" aria-label="Закрыть окно">✕</button>
+      </div>
+
       <div class="meta" id="modalMeta"></div>
+
+      <div class="player" id="player">
+        <div class="player-message">Выбери фильм в каталоге.</div>
+      </div>
+
       <p id="modalDesc"></p>
-      <a class="btn" id="watch" href="#" target="_blank" rel="noopener noreferrer">
-        Найти легальный просмотр
-      </a>
-      <p class="note">Доступность фильма зависит от сервиса и региона.</p>
+      <p class="small-note" id="playerNote">
+        Видео должно быть разрешено для встраивания владельцем или правообладателем.
+      </p>
     </div>
   </div>
-</div>
 
-<script>
-const films = [
-  {title:"Джон Уик",year:2014,genre:"Боевик",desc:"История бывшего наёмника, который возвращается к опасной жизни.",poster:"https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"},
-  {title:"Форсаж 7",year:2015,genre:"Боевик",desc:"Скорость, команда и захватывающие приключения.",poster:"https://image.tmdb.org/t/p/w500/dCgm7efXDmiABSdWDHBDBx2jwmn.jpg"},
-  {title:"Без жалости",year:2021,genre:"Боевик",desc:"Военный триллер о поиске справедливости.",poster:"https://image.tmdb.org/t/p/w500/rEm96ib0sPiZBADNKBHKBv5bve9.jpg"},
-  {title:"Малыш на драйве",year:2017,genre:"Криминал",desc:"Водитель участвует в опасных ограблениях.",poster:"https://image.tmdb.org/t/p/w500/rmnQ9jKW72bHu8uKlMjPIb2VLMI.jpg"},
-  {title:"Назад в будущее",year:1985,genre:"Фантастика",desc:"Неожиданное путешествие во времени.",poster:"https://image.tmdb.org/t/p/w500/7lyBcpYB0Qt8gYhXYaEZUNlNQAv.jpg"},
-  {title:"Маска",year:1994,genre:"Комедия",desc:"Необычная маска меняет жизнь своего владельца.",poster:"https://image.tmdb.org/t/p/w500/xbbXp9px4o8Oe7IbGd0yIbla8mZ.jpg"},
-  {title:"Час пик",year:1998,genre:"Комедия",desc:"Два полицейских расследуют запутанное дело.",poster:"https://image.tmdb.org/t/p/w500/we7wOLVFgxhzLzUt0qNe50xdIQZ.jpg"},
-  {title:"Геошторм",year:2017,genre:"Фантастика",desc:"Учёные пытаются остановить глобальную катастрофу.",poster:"https://image.tmdb.org/t/p/w500/nrsx0jEaBgXq4PWo7SooSnYJTv.jpg"}
-];
+  <footer>
+    © <span id="year"></span> KinoXit. Каталог фильмов.
+  </footer>
 
-const grid = document.getElementById("films");
-const search = document.getElementById("search");
-const genre = document.getElementById("genre");
-const empty = document.getElementById("empty");
-const modal = document.getElementById("modal");
+  <script>
+    /*
+      Чтобы добавить видео:
+      1. Найди разрешённое для встраивания видео на YouTube.
+      2. Нажми «Поделиться» → «Встроить».
+      3. В коде ниже укажи его ID в поле videoId.
+      4. Не вставляй сюда обычную ссылку целиком — нужен только ID.
 
-function renderFilms() {
-  const query = search.value.trim().toLowerCase();
-  const selectedGenre = genre.value;
+      Если videoId пустой, плеер покажет инструкцию.
+    */
 
-  const results = films
-    .map((film, index) => ({film, index}))
-    .filter(({film}) =>
-      film.title.toLowerCase().includes(query) &&
-      (!selectedGenre || film.genre === selectedGenre)
-    );
+    const films = [
+      {
+        title: "Джон Уик",
+        year: 2014,
+        genre: "Боевик",
+        desc: "История бывшего наёмника, который возвращается к опасной жизни.",
+        poster: "https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg",
+        videoId: ""
+      },
+      {
+        title: "Форсаж 7",
+        year: 2015,
+        genre: "Боевик",
+        desc: "Скорость, команда и захватывающие приключения.",
+        poster: "https://image.tmdb.org/t/p/w500/dCgm7efXDmiABSdWDHBDBx2jwmn.jpg",
+        videoId: ""
+      },
+      {
+        title: "Без жалости",
+        year: 2021,
+        genre: "Боевик",
+        desc: "Военный триллер о поиске справедливости.",
+        poster: "https://image.tmdb.org/t/p/w500/rEm96ib0sPiZBADNKBHKBv5bve9.jpg",
+        videoId: ""
+      },
+      {
+        title: "Малыш на драйве",
+        year: 2017,
+        genre: "Криминал",
+        desc: "Водитель оказывается втянут в опасные ограбления.",
+        poster: "https://image.tmdb.org/t/p/w500/rmnQ9jKW72bHu8uKlMjPIb2VLMI.jpg",
+        videoId: ""
+      },
+      {
+        title: "Назад в будущее",
+        year: 1985,
+        genre: "Фантастика",
+        desc: "Неожиданное путешествие во времени.",
+        poster: "https://image.tmdb.org/t/p/w500/7lyBcpYB0Qt8gYhXYaEZUNlNQAv.jpg",
+        videoId: ""
+      },
+      {
+        title: "Маска",
+        year: 1994,
+        genre: "Комедия",
+        desc: "Необычная маска меняет жизнь своего владельца.",
+        poster: "https://image.tmdb.org/t/p/w500/xbbXp9px4o8Oe7IbGd0yIbla8mZ.jpg",
+        videoId: ""
+      },
+      {
+        title: "Час пик",
+        year: 1998,
+        genre: "Комедия",
+        desc: "Два полицейских расследуют запутанное дело.",
+        poster: "https://image.tmdb.org/t/p/w500/we7wOLVFgxhzLzUt0qNe50xdIQZ.jpg",
+        videoId: ""
+      },
+      {
+        title: "Геошторм",
+        year: 2017,
+        genre: "Фантастика",
+        desc: "Учёные пытаются остановить глобальную катастрофу.",
+        poster: "https://image.tmdb.org/t/p/w500/nrsx0jEaBgXq4PWo7SooSnYJTv.jpg",
+        videoId: ""
+      }
+    ];
 
-  grid.innerHTML = results.map(({film, index}) => `
-    <article class="card" tabindex="0" role="button"
-      data-index="${index}" aria-label="Подробнее: ${film.title}">
-      <div class="poster">
-        <img src="${film.poster}" alt="Постер: ${film.title}" loading="lazy">
-      </div>
-      <div class="info">
-        <h3>${film.title}</h3>
-        <div class="meta">${film.year} · ${film.genre}</div>
-        <p>${film.desc}</p>
-        <span class="tag">${film.genre}</span>
-      </div>
-    </article>
-  `).join("");
+    const grid = document.getElementById("films");
+    const search = document.getElementById("search");
+    const genre = document.getElementById("genre");
+    const empty = document.getElementById("empty");
+    const modal = document.getElementById("modal");
+    const player = document.getElementById("player");
 
-  empty.hidden = results.length > 0;
-}
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-function openFilm(index) {
-  const film = films[index];
-  if (!film) return;
+    function renderFilms() {
+      const query = search.value.trim().toLowerCase();
+      const selectedGenre = genre.value;
 
-  document.getElementById("modalTitle").textContent = film.title;
-  document.getElementById("modalMeta").textContent =
-    film.year + " · " + film.genre;
-  document.getElementById("modalDesc").textContent = film.desc;
+      const results = films
+        .map((film, index) => ({ film, index }))
+        .filter(({ film }) =>
+          film.title.toLowerCase().includes(query) &&
+          (!selectedGenre || film.genre === selectedGenre)
+        );
 
-  const poster = document.getElementById("modalPoster");
-  poster.src = film.poster;
-  poster.alt = "Постер: " + film.title;
+      grid.innerHTML = results.map(({ film, index }) => `
+        <article class="card" tabindex="0" role="button" data-index="${index}">
+          <div class="poster">
+            <img src="${film.poster}"
+                 alt="Постер: ${film.title}"
+                 loading="lazy">
+          </div>
+          <div class="info">
+            <h3>${film.title}</h3>
+            <div class="meta">${film.year} · ${film.genre}</div>
+            <span class="tag">${film.genre}</span>
+          </div>
+        </article>
+      `).join("");
 
-  document.getElementById("watch").href =
-    "https://www.google.com/search?q=" +
-    encodeURIComponent(film.title + " " + film.year + " смотреть легально");
+      empty.hidden = results.length > 0;
+    }
 
-  modal.classList.add("open");
-  document.getElementById("close").focus();
-}
+    function openFilm(index) {
+      const film = films[index];
+      if (!film) return;
 
-function closeFilm() {
-  modal.classList.remove("open");
-}
+      document.getElementById("modalTitle").textContent = film.title;
+      document.getElementById("modalMeta").textContent =
+        film.year + " · " + film.genre;
+      document.getElementById("modalDesc").textContent = film.desc;
 
-grid.addEventListener("click", event => {
-  const card = event.target.closest(".card");
-  if (card) openFilm(Number(card.dataset.index));
-});
+      // Очищаем предыдущий плеер, чтобы старое видео не продолжало играть.
+      player.replaceChildren();
 
-grid.addEventListener("keydown", event => {
-  if (event.key !== "Enter" && event.key !== " ") return;
-  const card = event.target.closest(".card");
-  if (card) {
-    event.preventDefault();
-    openFilm(Number(card.dataset.index));
-  }
-});
+      if (/^[a-zA-Z0-9_-]{11}$/.test(film.videoId)) {
+        const iframe = document.createElement("iframe");
+        iframe.src =
+          "https://www.youtube-nocookie.com/embed/" +
+          encodeURIComponent(film.videoId);
+        iframe.title = "Видео: " + film.title;
+        iframe.allow =
+          "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+        iframe.allowFullscreen = true;
+        iframe.referrerPolicy = "strict-origin-when-cross-origin";
+        player.appendChild(iframe);
+      } else {
+        const message = document.createElement("div");
+        message.className = "player-message";
+        message.textContent =
+          "Плеер готов! Для этого фильма ещё не добавлено видео, разрешённое для встраивания.";
+        player.appendChild(message);
+      }
 
-search.addEventListener("input", renderFilms);
-genre.addEventListener("change", renderFilms);
-document.getElementById("close").addEventListener("click", closeFilm);
+      modal.classList.add("open");
+      document.getElementById("close").focus();
+    }
 
-modal.addEventListener("click", event => {
-  if (event.target === modal) closeFilm();
-});
+    function closeFilm() {
+      modal.classList.remove("open");
+      // Останавливаем воспроизведение при закрытии окна.
+      player.replaceChildren();
+    }
 
-document.addEventListener("keydown", event => {
-  if (event.key === "Escape") closeFilm();
-});
+    grid.addEventListener("click", event => {
+      const card = event.target.closest(".card");
+      if (card) openFilm(Number(card.dataset.index));
+    });
 
-renderFilms();
-</script>
+    grid.addEventListener("keydown", event => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const card = event.target.closest(".card");
+      if (card) {
+        event.preventDefault();
+        openFilm(Number(card.dataset.index));
+      }
+    });
+
+    search.addEventListener("input", renderFilms);
+    genre.addEventListener("change", renderFilms);
+    document.getElementById("close").addEventListener("click", closeFilm);
+
+    modal.addEventListener("click", event => {
+      if (event.target === modal) closeFilm();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeFilm();
+    });
+
+    renderFilms();
+  </script>
 </body>
 </html>
