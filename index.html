@@ -195,14 +195,16 @@ footer{
 
 <script>
 const films=[
-  {title:"Джон Уик",year:2014,genre:"Боевик",desc:"История бывшего наёмника, который возвращается к опасной жизни."},
-  {title:"Форсаж 7",year:2015,genre:"Боевик",desc:"Скорость, команда и захватывающие приключения."},
-  {title:"Без жалости",year:2021,genre:"Боевик",desc:"Военный триллер о поиске справедливости."},
-  {title:"Малыш на драйве",year:2017,genre:"Криминал",desc:"Водитель участвует в опасных ограблениях."},
-  {title:"Назад в будущее",year:1985,genre:"Фантастика",desc:"Неожиданное путешествие во времени."},
-  {title:"Маска",year:1994,genre:"Комедия",desc:"Необычная маска меняет жизнь своего владельца."},
-  {title:"Час пик",year:1998,genre:"Комедия",desc:"Два полицейских расследуют запутанное дело."},
-  {title:"Геошторм",year:2017,genre:"Фантастика",desc:"Учёные пытаются остановить глобальную катастрофу."}
+
+const films = [
+  {title:"Джон Уик",year:2014,genre:"Боевик",desc:"История бывшего наёмника, который возвращается к опасной жизни.",poster:"https://image.tmdb.org/t/p/w500/fZPSd91yGE9fCcCe6OoQr6E3Bev.jpg"},
+  {title:"Форсаж 7",year:2015,genre:"Боевик",desc:"Скорость, команда и захватывающие приключения.",poster:"https://image.tmdb.org/t/p/w500/dCgm7efXDmiABSdWDHBDBx2jwmn.jpg"},
+  {title:"Без жалости",year:2021,genre:"Боевик",desc:"Военный триллер о поиске справедливости.",poster:"https://image.tmdb.org/t/p/w500/rEm96ib0sPiZBADNKBHKBv5bve9.jpg"},
+  {title:"Малыш на драйве",year:2017,genre:"Криминал",desc:"Водитель участвует в опасных ограблениях.",poster:"https://image.tmdb.org/t/p/w500/rmnQ9jKW72bHu8uKlMjPIb2VLMI.jpg"},
+  {title:"Назад в будущее",year:1985,genre:"Фантастика",desc:"Неожиданное путешествие во времени.",poster:"https://image.tmdb.org/t/p/w500/7lyBcpYB0Qt8gYhXYaEZUNlNQAv.jpg"},
+  {title:"Маска",year:1994,genre:"Комедия",desc:"Необычная маска меняет жизнь своего владельца.",poster:"https://image.tmdb.org/t/p/w500/xbbXp9px4o8Oe7IbGd0yIbla8mZ.jpg"},
+  {title:"Час пик",year:1998,genre:"Комедия",desc:"Два полицейских расследуют запутанное дело.",poster:"https://image.tmdb.org/t/p/w500/we7wOLVFgxhzLzUt0qNe50xdIQZ.jpg"},
+  {title:"Геошторм",year:2017,genre:"Фантастика",desc:"Учёные пытаются остановить глобальную катастрофу.",poster:"https://image.tmdb.org/t/p/w500/nrsx0jEaBgXq4PWo7SooSnYJTv.jpg"}
 ];
 let selectedGenre="Все";
 const grid=document.getElementById("movies");
