@@ -4,156 +4,116 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Kino Xit — твой мир кино. Новости, обзоры и лучшие фильмы.">
-<title>Kino Xit — Мир кино</title>
+<title>Kino Xit — Фильмы</title>
 <style>
-:root{--red:#ff293d;--bg:#0b0b10;--panel:#17171f;--muted:#a7a7b5}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:#fff;font-family:Arial,sans-serif}
-header{padding:18px 7%;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;background:#111116;border-bottom:1px solid #292932}
-.logo{font-size:28px;font-weight:900;letter-spacing:1px}
-.logo span{color:var(--red)}
-nav{display:flex;gap:20px;flex-wrap:wrap}
-nav a{color:#eee;text-decoration:none;font-size:14px}
-nav a:hover{color:var(--red)}
-.hero{padding:75px 7%;background:radial-gradient(ellipse at 80% 30%,#52121d 0,transparent 40%),linear-gradient(110deg,#211016,#101016 65%)}
-.tag{display:inline-block;background:var(--red);padding:8px 12px;border-radius:4px;font-size:11px;font-weight:bold;letter-spacing:1px}
-.hero h1{font-size:clamp(38px,7vw,72px);line-height:1.05;margin:22px 0}
-.hero h1 span{color:var(--red)}
-.hero p{max-width:540px;color:#c5c5ce;line-height:1.7}
-main{padding:35px 7%}
-.tools{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-h2{font-size:25px}
-input,select{background:#1a1a23;color:white;border:1px solid #373743;border-radius:8px;padding:12px;font-size:14px}
-input{width:min(100%,280px)}
-.filters{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 24px}
-.filters button{border:1px solid #34343e;color:#ddd;background:#17171f;border-radius:20px;padding:9px 15px;cursor:pointer}
-.filters button.active,.filters button:hover{background:var(--red);border-color:var(--red);color:white}
-.movies{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:22px}
-.movie{overflow:hidden;background:var(--panel);border:1px solid #292932;border-radius:12px;transition:.2s}
-.movie:hover{transform:translateY(-5px);border-color:var(--red)}
-.poster{height:255px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;font-size:26px;font-weight:900;letter-spacing:1px;background:linear-gradient(145deg,#671c2a,#1b1b2c)}
-.movie:nth-child(4n+2) .poster{background:linear-gradient(145deg,#174e68,#1c1c2b)}
-.movie:nth-child(4n+3) .poster{background:linear-gradient(145deg,#71511d,#20202a)}
-.movie:nth-child(4n+4) .poster{background:linear-gradient(145deg,#38385e,#15151c)}
+body{margin:0;background:#101010;color:white;font-family:Arial,sans-serif}
+header{background:#191919;padding:22px 6%;border-bottom:2px solid #e50914}
+.logo{font-size:30px;font-weight:bold;color:#e50914}
+.logo span{color:white}
+header p{color:#bbb;margin-bottom:0}
+main{max-width:1200px;margin:auto;padding:25px 18px}
+h1{font-size:30px}
+.search{width:100%;padding:14px;border:1px solid #444;border-radius:8px;background:#202020;color:white;font-size:16px;margin:10px 0 20px}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
+.categories button{background:#252525;color:white;border:1px solid #444;padding:12px 18px;border-radius:8px;cursor:pointer}
+.categories button:hover,.categories button.active{background:#e50914;border-color:#e50914}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card{background:#1c1c1c;border-radius:10px;overflow:hidden;border:1px solid #303030}
+.poster{height:170px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;font-size:23px;font-weight:bold;background:linear-gradient(135deg,#4b0808,#171717 70%)}
+.card:nth-child(3n+2) .poster{background:linear-gradient(135deg,#173b50,#171717 75%)}
+.card:nth-child(3n) .poster{background:linear-gradient(135deg,#514016,#171717 75%)}
 .info{padding:15px}
-.info h3{margin:0 0 9px;font-size:17px}
-.info p{font-size:13px;color:var(--muted);line-height:1.5}
-.year{color:#ff5969}
-.genre{display:inline-block;font-size:11px;color:#ff8993;border:1px solid #71303a;padding:5px 8px;border-radius:4px}
-.empty{color:#bbb;padding:30px 0}
-.about{padding:28px;background:#15151d;border-radius:12px;color:#c6c6d0;line-height:1.7}
-footer{margin-top:45px;padding:30px 7%;text-align:center;border-top:1px solid #292932;color:#92929f;font-size:13px}
-[hidden]{display:none!important}
-@media(max-width:550px){header,main,.hero{padding-left:5%;padding-right:5%}.poster{height:220px}}
+.info h3{margin:0 0 10px;font-size:19px}
+.meta{color:#e65a5a;font-size:13px}
+.info p{color:#bbb;font-size:14px;line-height:1.5}
+.tag{display:inline-block;background:#303030;padding:6px 9px;border-radius:5px;font-size:12px}
+footer{text-align:center;padding:25px;color:#888;border-top:1px solid #333;margin-top:35px}
+#empty{color:#bbb;display:none}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">KINO <span>XIT</span></div>
-  <nav>
-    <a href="#home">Главная</a>
-    <a href="#movies">Фильмы</a>
-    <a href="#about">О сайте</a>
-  </nav>
+  <p>Твой каталог кино — выбирай фильм и наслаждайся!</p>
 </header>
 
-<section class="hero" id="home">
-  <span class="tag">ТВОЙ МИР КИНО</span>
-  <h1>Больше эмоций.<br><span>Больше кино.</span></h1>
-  <p>Добро пожаловать в Kino Xit! Открывай новые истории, знакомься с известными фильмами и выбирай, что посмотреть сегодня.</p>
-</section>
+<main>
+  <h1>Каталог фильмов</h1>
+  <input class="search" id="search" placeholder="🔎 Найти фильм по названию..." />
 
-<main id="movies">
-  <div class="tools">
-    <h2>🎬 Каталог фильмов</h2>
-    <input id="search" type="search" placeholder="🔎 Найти фильм..." aria-label="Поиск фильмов">
-  </div>
-
-  <div class="filters" id="filters">
+  <div class="categories">
     <button class="active" data-genre="Все">Все фильмы</button>
     <button data-genre="Боевик">Боевики</button>
-    <button data-genre="Фантастика">Фантастика</button>
-    <button data-genre="Криминал">Криминал</button>
     <button data-genre="Комедия">Комедии</button>
+    <button data-genre="Криминал">Криминал</button>
+    <button data-genre="Фантастика">Фантастика</button>
   </div>
 
-  <div class="movies" id="movie-list">
-    <article class="movie" data-title="Бэтмен Начало Batman Begins" data-genre="Боевик">
-      <div class="poster">Боевики<br></div>
-      <div class="info"><h3>Боевики</h3><p><span class="year"></span> · Боевик</p><span class="genre">Супергерои</span></div>
-    </article>
-    <article class="movie" data-title="Малыш на драйве Baby Driver" data-genre="Криминал">
-      <div class="poster">Фантастика<br></div>
-      <div class="info"><h3>>Фантастика<</h3><p><span class="year"/span> · Криминал</p><span class="genre">Погони</span></div>
-    </article>
-    <article class="movie" data-title="Геошторм Geostorm" data-genre="Фантастика">
-      <div class="poster">Криминал</div>
-      <div class="info"><h3>Криминал</h3><p><span class="year"</span> · Фантастика</p><span class="genre">Катастрофа</span></div>
-    </article>
-    <article class="movie" data-title="Без жалости Without Remorse" data-genre="Боевик">
-      <div class="poster">Комедии<br></div>
-      <div class="info"><h3>Комедии</h3><p><span class="year"></span> · Боевик</p><span class="genre">Экшен</span></div>
-    </article>
-    <article class="movie" data-title="Интерстеллар Interstellar" data-genre="Фантастика">
-      <div class="poster">INTER<br>STELLAR</div>
-      <div class="info"><h3>Интерстеллар</h3><p><span class="year">2014</span> · Фантастика</p><span class="genre">Космос</span></div>
-    </article>
-    <article class="movie" data-title="Один дома Home Alone" data-genre="Комедия">
-      <div class="poster"><br></div>
-      <div class="info"><h3></h3><p><span class="year"></span> · Комедия</p><span class="genre">Семейный</span></div>
-    </article>
-    <article class="movie" data-title="Начало Inception" data-genre="Фантастика">
-      <div class="poster"></div>
-      <div class="info"><h3></h3><p><span class="year"></span> · Фантастика</p><span class="genre">Триллер</span></div>
-    </article>
-    <article class="movie" data-title="Форсаж Fast Furious" data-genre="Боевик">
-      <div class="poster"></div>
-      <div class="info"><h3></h3><p><span class="year"></span> · Боевик</p><span class="genre">Автомобили</span></div>
-    </article>
-  </div>
-  <p class="empty" id="empty" hidden>Ничего не найдено. Попробуй другое название или категорию.</p>
-
-  <section id="about" style="margin-top:45px">
-    <h2>О Kino Xit</h2>
-    <div class="about">Kino Xit — место для любителей кино. Здесь можно искать фильмы, изучать жанры и открывать для себя новые истории. Каталог будет пополняться.</div>
-  </section>
+  <div class="grid" id="movies"></div>
+  <p id="empty">Фильмы не найдены. Попробуй другое название.</p>
 </main>
 
-<footer>
-  <div class="logo">KINO <span>XIT</span></div>
-  <p>Твой мир кино · © 2026 Kino Xit</p>
-  <p>Сайт создан для ознакомления с фильмами. Мы не размещаем нелицензированные копии фильмов.</p>
-</footer>
+<footer>© 2026 Kino Xit · Каталог фильмов</footer>
 
 <script>
-const search=document.getElementById('search');
-const cards=[...document.querySelectorAll('.movie')];
-const buttons=[...document.querySelectorAll('#filters button')];
-const empty=document.getElementById('empty');
-let genre='Все';
+const films = [
+ {title:"Джон Уик",year:2014,genre:"Боевик",desc:"Бывший наёмник возвращается к опасной жизни."},
+ {title:"Форсаж 7",year:2015,genre:"Боевик",desc:"Команда гонщиков сталкивается с новым противником."},
+ {title:"Безумный Макс: Дорога ярости",year:2015,genre:"Боевик",desc:"Погоня за свободой в постапокалиптическом мире."},
 
-function update(){
-  const query=search.value.trim().toLocaleLowerCase('ru');
-  let count=0;
-  cards.forEach(card=>{
-    const matchesTitle=card.dataset.title.toLocaleLowerCase('ru').includes(query);
-    const matchesGenre=genre==='Все'||card.dataset.genre===genre;
-    const show=matchesTitle&&matchesGenre;
-    card.hidden=!show;
-    if(show)count++;
-  });
-  empty.hidden=count>0;
+ {title:"Маска",year:1994,genre:"Комедия",desc:"Обычный человек находит волшебную маску."},
+ {title:"Один дома",year:1990,genre:"Комедия",desc:"Мальчик защищает свой дом от грабителей."},
+ {title:"Мистер Бин",year:1997,genre:"Комедия",desc:"Комические приключения знаменитого героя."},
+
+ {title:"Крёстный отец",year:1972,genre:"Криминал",desc:"История влиятельной семьи и её криминального мира."},
+ {title:"Отступники",year:2006,genre:"Криминал",desc:"Полицейский и преступник внедряются в чужие организации."},
+ {title:"Лицо со шрамом",year:1983,genre:"Криминал",desc:"История взлёта и падения криминального авторитета."},
+
+ {title:"Интерстеллар",year:2014,genre:"Фантастика",desc:"Путешествие за пределы Земли ради будущего человечества."},
+ {title:"Аватар",year:2009,genre:"Фантастика",desc:"Приключение на далёкой планете Пандора."},
+ {title:"Матрица",year:1999,genre:"Фантастика",desc:"Человек узнаёт неожиданную правду об окружающем мире."}
+];
+
+let selectedGenre = "Все";
+const grid = document.getElementById("movies");
+const search = document.getElementById("search");
+const empty = document.getElementById("empty");
+
+function renderMovies(){
+  const query = search.value.trim().toLowerCase();
+  const filtered = films.filter(f =>
+    (selectedGenre === "Все" || f.genre === selectedGenre) &&
+    f.title.toLowerCase().includes(query)
+  );
+
+  grid.innerHTML = filtered.map(f => `
+    <article class="card">
+      <div class="poster">${f.title}</div>
+      <div class="info">
+        <h3>${f.title}</h3>
+        <div class="meta">${f.year} · ${f.genre}</div>
+        <p>${f.desc}</p>
+        <span class="tag">${f.genre}</span>
+      </div>
+    </article>
+  `).join("");
+
+  empty.style.display = filtered.length ? "none" : "block";
 }
-search.addEventListener('input',update);
-buttons.forEach(button=>{
-  button.addEventListener('click',()=>{
-    genre=button.dataset.genre;
-    buttons.forEach(item=>item.classList.toggle('active',item===button));
-    update();
+
+document.querySelectorAll(".categories button").forEach(button => {
+  button.addEventListener("click", () => {
+    selectedGenre = button.dataset.genre;
+    document.querySelectorAll(".categories button")
+      .forEach(b => b.classList.remove("active"));
+    button.classList.add("active");
+    renderMovies();
   });
 });
+
+search.addEventListener("input", renderMovies);
+renderMovies();
 </script>
 </body>
 </html>
