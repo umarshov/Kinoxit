@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -6,150 +5,228 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0b0b0e">
-<meta name="description" content="Kino Xit — каталог боевиков, комедий, криминальных фильмов и фантастики.">
+<meta name="description" content="Kino Xit — каталог боевиков, комедий, криминальных фильмов и фантастики. Открывай новые фильмы и выбирай, что посмотреть.">
 <title>Kino Xit — Каталог фильмов</title>
-
-<!-- ВАЖНО: сюда вставь свой старый метатег подтверждения Google -->
-
 <style>
+:root {
+  --bg:#0b0b0e;
+  --panel:#151519;
+  --red:#f02635;
+  --text:#f7f7fa;
+  --muted:#a3a3ad;
+}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:#0b0b0e;color:#fff;font-family:Arial,sans-serif}
-header{position:sticky;top:0;z-index:5;background:#111116;border-bottom:1px solid #303038}
-nav{max-width:1200px;margin:auto;padding:18px 22px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-size:28px;font-weight:900;color:#fff;text-decoration:none}
-.logo span{color:#f02635}
-nav a:last-child{color:#ddd;text-decoration:none;font-size:14px}
-main{max-width:1200px;margin:auto;padding:24px 20px}
-.hero{padding:55px 35px;border-radius:18px;background:linear-gradient(115deg,#3d101b,#171116 65%,#621525);border:1px solid #55202b}
-.hero small{color:#ff7781;letter-spacing:3px;font-weight:bold}
-.hero h1{font-size:clamp(38px,6vw,66px);margin:18px 0}
-.hero h1 span{color:#f02635}
-.hero p{color:#ccc;line-height:1.7;max-width:550px}
-.btn{display:inline-block;background:#f02635;color:white;text-decoration:none;padding:13px 20px;border-radius:8px;font-weight:bold;margin-top:10px}
-.section{padding-top:36px}
-.heading{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
-h2{font-size:26px;margin:0 0 20px}
-h2 span{color:#f02635}
-.search{padding:13px 15px;width:300px;max-width:100%;border:1px solid #393941;border-radius:8px;background:#19191f;color:white;margin-bottom:20px}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+header{
+  position:sticky;top:0;z-index:10;
+  background:rgba(11,11,14,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid #29292f;
+}
+.nav{
+  max-width:1250px;margin:auto;padding:17px 22px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.logo{font-size:28px;font-weight:900;letter-spacing:-1px}
+.logo b{color:var(--red)}
+.nav-link{color:#ddd;font-size:14px}
+.nav-link:hover{color:var(--red)}
+.container{max-width:1250px;margin:auto;padding:0 22px}
+.hero{
+  margin-top:28px;min-height:350px;border-radius:20px;
+  padding:clamp(25px,5vw,65px);
+  display:flex;align-items:center;
+  background:
+    radial-gradient(ellipse at 85% 20%,#8d172d88,transparent 45%),
+    linear-gradient(110deg,#261017,#171116 55%,#30111c);
+  border:1px solid #48202a;overflow:hidden;
+  position:relative;
+}
+.hero:after{
+  content:"KX";position:absolute;right:5%;bottom:-55px;
+  font-size:clamp(150px,25vw,300px);font-weight:900;
+  color:#ffffff08;pointer-events:none;
+}
+.hero-content{max-width:620px;position:relative;z-index:1}
+.eyebrow{
+  color:#ff6470;text-transform:uppercase;letter-spacing:3px;
+  font-size:12px;font-weight:bold;
+}
+.hero h1{
+  font-size:clamp(38px,6vw,68px);line-height:1.02;
+  margin:17px 0;letter-spacing:-2px;
+}
+.hero h1 span{color:var(--red)}
+.hero p{color:#c4bdc3;line-height:1.7;max-width:500px}
+.primary{
+  display:inline-block;background:var(--red);color:white;
+  padding:14px 22px;border-radius:9px;font-weight:bold;
+  margin-top:12px;transition:.2s;
+}
+.primary:hover{background:#c81727;transform:translateY(-2px)}
+.section{padding-top:38px}
+.section-head{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:14px;margin-bottom:20px;
+}
+.section h2{font-size:25px;margin:0}
+.section h2 span{color:var(--red)}
+.search{
+  width:min(100%,340px);padding:13px 15px;
+  border-radius:9px;border:1px solid #34343b;
+  background:#17171c;color:white;outline:none;
+}
+.search:focus{border-color:var(--red)}
 .filters{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:24px}
-.filters button{padding:11px 15px;background:#1b1b21;border:1px solid #393941;border-radius:8px;color:#eee;cursor:pointer}
-.filters button.active,.filters button:hover{background:#f02635;border-color:#f02635}
-.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.card{background:#17171c;border:1px solid #2c2c33;border-radius:12px;overflow:hidden;transition:.2s}
-.card:hover{transform:translateY(-4px);border-color:#a42a38}
-.poster{height:205px;position:relative;overflow:hidden;background:linear-gradient(145deg,#541522,#21131b 65%,#111116)}
-.poster:before{content:"";position:absolute;width:150px;height:150px;border:1px solid #ffffff20;border-radius:50%;top:20px;left:calc(50% - 75px);box-shadow:0 0 0 25px #ffffff06,0 0 0 50px #ffffff04}
-.poster:after{content:"";position:absolute;width:130%;height:65px;background:#ffffff08;transform:rotate(-35deg);top:70px;left:-15%}
-.card:nth-child(4n+2) .poster{background:linear-gradient(145deg,#174957,#151c26)}
-.card:nth-child(4n+3) .poster{background:linear-gradient(145deg,#51401c,#191711)}
-.card:nth-child(4n+4) .poster{background:linear-gradient(145deg,#382663,#17131f)}
+.filters button{
+  border:1px solid #34343b;background:#17171c;color:#ddd;
+  border-radius:8px;padding:11px 16px;cursor:pointer;
+  transition:.2s;
+}
+.filters button:hover,.filters button.active{
+  background:var(--red);border-color:var(--red);color:white;
+}
+.grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;
+}
+.card{
+  overflow:hidden;background:var(--panel);
+  border:1px solid #29292f;border-radius:13px;
+  transition:transform .2s,border-color .2s;
+}
+.card:hover{transform:translateY(-5px);border-color:#87303a}
+.poster{
+  height:205px;display:flex;align-items:center;justify-content:center;
+  padding:18px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(145deg,#651c2b,#1b131a 75%);
+}
+.poster:before{
+  content:"";position:absolute;width:170px;height:170px;
+  border:1px solid #ffffff18;border-radius:50%;
+  box-shadow:0 0 0 25px #ffffff05,0 0 0 50px #ffffff04;
+}
+.card:nth-child(4n+2) .poster{background:linear-gradient(145deg,#184b58,#151b25)}
+.card:nth-child(4n+3) .poster{background:linear-gradient(145deg,#57421a,#1b1712)}
+.card:nth-child(4n+4) .poster{background:linear-gradient(145deg,#402d72,#17131f)}
+.poster-title{
+  position:relative;z-index:1;font-size:23px;font-weight:900;
+  text-shadow:0 2px 12px #000;line-height:1.15;
+}
 .info{padding:15px}
-.info h3{margin:0 0 9px;font-size:17px;line-height:1.4}
+.info h3{margin:0 0 10px;font-size:17px;line-height:1.35}
 .meta{font-size:12px;color:#ff6975;margin-bottom:10px}
-.info p{color:#aaa;font-size:13px;line-height:1.6;margin:0 0 13px}
-.tag{font-size:11px;color:#eee;border:1px solid #393941;border-radius:5px;padding:5px 8px}
-.empty{display:none;color:#aaa;padding:20px 0}
-footer{margin-top:50px;border-top:1px solid #29292f;padding:28px 15px;text-align:center;color:#888;font-size:13px;line-height:1.8}
-footer strong{font-size:22px;color:#fff}
-footer strong span{color:#f02635}
-@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media(max-width:600px){main{padding:18px 12px}.hero{padding:32px 20px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.poster{height:150px}.info{padding:10px}.info h3{font-size:15px}.info p{font-size:12px}nav{padding:15px 12px}.logo{font-size:23px}}
-@media(max-width:350px){.grid{grid-template-columns:1fr}}
+.info p{color:var(--muted);font-size:13px;line-height:1.55;margin:0 0 13px}
+.tag{
+  display:inline-block;border:1px solid #393940;border-radius:5px;
+  padding:5px 8px;color:#ddd;font-size:11px;
+}
+.empty{display:none;color:var(--muted);padding:25px 0}
+footer{
+  margin-top:55px;padding:30px 20px;border-top:1px solid #29292f;
+  text-align:center;color:#888;font-size:13px;line-height:1.8;
+}
+.footer-logo{font-size:22px;font-weight:900;color:white}
+.footer-logo span{color:var(--red)}
+@media(max-width:950px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:650px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+  .container{padding:0 14px}
+  .nav{padding:14px}
+  .logo{font-size:24px}
+  .hero{min-height:320px;padding:25px 20px}
+  .poster{height:155px}
+  .poster-title{font-size:18px}
+  .info{padding:11px}
+  .info h3{font-size:15px}
+  .info p{font-size:12px}
+  .section h2{font-size:22px}
+}
+@media(max-width:360px){.grid{grid-template-columns:1fr}}
 </style>
 </head>
-
 <body>
 <header>
-<nav>
-<a class="logo" href="#">KINO <span>XIT</span></a>
-<a href="#catalog">КАТАЛОГ ↓</a>
-</nav>
+  <nav class="nav">
+    <a class="logo" href="#">KINO <b>XIT</b></a>
+    <a class="nav-link" href="#catalog">КАТАЛОГ ФИЛЬМОВ ↓</a>
+  </nav>
 </header>
 
-<main>
-<section class="hero">
-<small>ТВОЯ ТЕРРИТОРИЯ КИНО</small>
-<h1>Найди свой<br><span>КИНОХИТ</span></h1>
-<p>Боевики, комедии, криминальные истории и фантастические миры. Выбирай жанр и открывай интересные фильмы.</p>
-<a class="btn" href="#catalog">Открыть каталог →</a>
-</section>
+<main class="container">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="eyebrow">Твоя территория кино</div>
+      <h1>Найди свой<br><span>КИНОХИТ</span></h1>
+      <p>Боевики, комедии, криминальные истории и фантастические миры. Выбирай любимый жанр и открывай интересные фильмы.</p>
+      <a class="primary" href="#catalog">Смотреть каталог →</a>
+    </div>
+  </section>
 
-<section class="section" id="catalog">
-<div class="heading">
-<h2>Каталог <span>фильмов</span></h2>
-<input class="search" id="search" type="search" placeholder="🔎 Найти фильм...">
-</div>
+  <section class="section" id="catalog">
+    <div class="section-head">
+      <h2>Каталог <span>фильмов</span></h2>
+      <input class="search" id="search" type="search" placeholder="⌕  Поиск фильма...">
+    </div>
 
-<div class="filters">
-<button class="active" data-genre="Все">Все фильмы</button>
-<button data-genre="Боевик">Боевики</button>
-<button data-genre="Комедия">Комедии</button>
-<button data-genre="Криминал">Криминал</button>
-<button data-genre="Фантастика">Фантастика</button>
-</div>
+    <div class="filters">
+      <button class="active" data-genre="Все">Все фильмы</button>
+      <button data-genre="Боевик">Боевики</button>
+      <button data-genre="Комедия">Комедии</button>
+      <button data-genre="Криминал">Криминал</button>
+      <button data-genre="Фантастика">Фантастика</button>
+    </div>
 
-<div class="grid" id="movies"></div>
-<div class="empty" id="empty">Фильмы не найдены. Попробуй другое название.</div>
-</section>
+    <div class="grid" id="movies"></div>
+    <div class="empty" id="empty">Ничего не найдено. Попробуй другое название.</div>
+  </section>
 </main>
 
 <footer>
-<strong>KINO <span>XIT</span></strong>
-<div>Твой каталог кино · 2026</div>
-<div>Права на фильмы принадлежат их владельцам.</div>
+  <div class="footer-logo">KINO <span>XIT</span></div>
+  <div>Твой каталог кино · 2026</div>
+  <div>Названия фильмов приведены для каталога. Права на фильмы принадлежат их владельцам.</div>
 </footer>
 
 <script>
 const films=[
-{title:"Джон Уик",year:2014,genre:"Боевик",desc:"Опасные противники и история мести."},
-{title:"Форсаж 7",year:2015,genre:"Боевик",desc:"Скорость, команда и захватывающие приключения."},
-{title:"Безумный Макс: Дорога ярости",year:2015,genre:"Боевик",desc:"Борьба за свободу в мире будущего."},
-{title:"Гладиатор",year:2000,genre:"Боевик",desc:"История воина, который ищет справедливость."},
-{title:"Маска",year:1994,genre:"Комедия",desc:"Волшебная маска меняет жизнь обычного человека."},
-{title:"Один дома",year:1990,genre:"Комедия",desc:"Мальчик защищает дом от грабителей."},
-{title:"Мистер Бин",year:1997,genre:"Комедия",desc:"Забавные ситуации и необычные приключения."},
-{title:"Такси",year:1998,genre:"Комедия",desc:"Необычный водитель помогает полиции."},
-{title:"Крёстный отец",year:1972,genre:"Криминал",desc:"История влиятельной семьи."},
-{title:"Отступники",year:2006,genre:"Криминал",desc:"Опасная игра полицейского и преступника."},
-{title:"Лицо со шрамом",year:1983,genre:"Криминал",desc:"Взлёт и падение криминального авторитета."},
-{title:"Славные парни",year:1990,genre:"Криминал",desc:"Жизнь в криминальном мире."},
-{title:"Интерстеллар",year:2014,genre:"Фантастика",desc:"Космическое путешествие ради будущего человечества."},
-{title:"Аватар",year:2009,genre:"Фантастика",desc:"Удивительный мир планеты Пандора."},
-{title:"Матрица",year:1999,genre:"Фантастика",desc:"Тайна мира, который кажется реальным."},
-{title:"Назад в будущее",year:1985,genre:"Фантастика",desc:"Неожиданное путешествие во времени."}
 ];
-
-let selected="Все";
+let selectedGenre="Все";
 const grid=document.getElementById("movies");
 const search=document.getElementById("search");
 const empty=document.getElementById("empty");
 
 function render(){
-const q=search.value.trim().toLocaleLowerCase("ru");
-const result=films.filter(f=>
-(selected==="Все"||f.genre===selected)&&
-f.title.toLocaleLowerCase("ru").includes(q)
-);
-grid.innerHTML=result.map(f=>`
-<article class="card">
-<div class="poster" aria-hidden="true"></div>
-<div class="info">
-<h3>${f.title}</h3>
-<div class="meta">${f.year} · ${f.genre}</div>
-<p>${f.desc}</p>
-<span class="tag">${f.genre}</span>
-</div>
-</article>`).join("");
-empty.style.display=result.length?"none":"block";
+ const q=search.value.trim().toLocaleLowerCase("ru");
+ const result=films.filter(f=>
+  (selectedGenre==="Все"||f.genre===selectedGenre)&&
+  f.title.toLocaleLowerCase("ru").includes(q)
+ );
+ grid.innerHTML=result.map(f=>`
+  <article class="card">
+  <div class="poster" aria-hidden="true"></div>
+   <div class="info">
+    <h3>${f.title}</h3>
+    <div class="meta">${f.year} · ${f.genre}</div>
+    <p>${f.desc}</p>
+    <span class="tag">${f.genre}</span>
+   </div>
+  </article>
+ `).join("");
+ empty.style.display=result.length?"none":"block";
 }
 document.querySelectorAll(".filters button").forEach(button=>{
-button.addEventListener("click",()=>{
-selected=button.dataset.genre;
-document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
-button.classList.add("active");
-render();
-});
+ button.addEventListener("click",()=>{
+  selectedGenre=button.dataset.genre;
+  document.querySelectorAll(".filters button").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  render();
+ });
 });
 search.addEventListener("input",render);
 render();
