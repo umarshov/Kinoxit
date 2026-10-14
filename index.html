@@ -216,15 +216,15 @@ function render(){
   f.title.toLocaleLowerCase("ru").includes(q)
  );
  grid.innerHTML=result.map(f=>`
-  <article class="card">
+<article class="card" onclick="openFilm('${f.title}')" style="cursor:pointer;">
   <div class="poster" aria-hidden="true"></div>
-   <div class="info">
+  <div class="info">
     <h3>${f.title}</h3>
     <div class="meta">${f.year} · ${f.genre}</div>
     <p>${f.desc}</p>
     <span class="tag">${f.genre}</span>
-   </div>
-  </article>
+  </div>
+</article>
  `).join("");
  empty.style.display=result.length?"none":"block";
 }
