@@ -239,5 +239,17 @@ document.querySelectorAll(".filters button").forEach(button=>{
 search.addEventListener("input",render);
 render();
 </script>
+function openFilm(title) {
+  const film = films.find(f => f.title === title);
+
+  if (!film) return;
+
+  alert(
+    film.title + " (" + film.year + ")\n\n" +
+    "Жанр: " + film.genre + "\n\n" +
+    film.desc
+  );
+}
+
 </body>
 </html>
