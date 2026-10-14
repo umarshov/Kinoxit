@@ -1,1 +1,202 @@
 
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kino Xit — Мир кино</title>
+  <meta name="description" content="Kino Xit — новости кино, обзоры и подборки лучших фильмов.">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101014;
+      color: white;
+    }
+    header {
+      padding: 22px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+      background: #19191f;
+      border-bottom: 1px solid #333;
+    }
+    .logo { font-size: 28px; font-weight: 900; }
+    .logo span { color: #ff303b; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 18px;
+    }
+    nav a:hover { color: #ff303b; }
+    .hero {
+      padding: 70px 7%;
+      background: linear-gradient(110deg, #31090e, #17171e 65%, #101014);
+    }
+    .hero h1 { font-size: clamp(36px, 6vw, 65px); margin: 0 0 15px; }
+    .hero h1 span { color: #ff303b; }
+    .hero p { color: #d0d0d7; line-height: 1.7; max-width: 550px; }
+    .tag {
+      display: inline-block;
+      background: #ff303b;
+      padding: 8px 13px;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 12px;
+      letter-spacing: 1px;
+    }
+    main { padding: 35px 7%; }
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+    input {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #41414b;
+      background: #202027;
+      color: white;
+      width: min(100%, 300px);
+      font-size: 15px;
+    }
+    .movies {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 22px;
+      margin-top: 25px;
+    }
+    .movie {
+      background: #1b1b22;
+      border: 1px solid #303039;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform .2s, border-color .2s;
+    }
+    .movie:hover { transform: translateY(-5px); border-color: #ff303b; }
+    .poster {
+      height: 245px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(145deg, #54131b, #242431 70%);
+      font-size: 24px;
+      font-weight: 900;
+    }
+    .movie:nth-child(2) .poster { background: linear-gradient(145deg, #153b54, #222230); }
+    .movie:nth-child(3) .poster { background: linear-gradient(145deg, #574019, #242431); }
+    .movie:nth-child(4) .poster { background: linear-gradient(145deg, #34344e, #17171d); }
+    .movie-info { padding: 16px; }
+    .movie-info h3 { margin: 0 0 8px; }
+    .movie-info p { color: #aaaab5; font-size: 14px; }
+    .year { color: #ff5962; }
+    .empty { color: #bbb; padding: 25px 0; }
+    footer {
+      padding: 28px 7%;
+      text-align: center;
+      color: #9999a5;
+      border-top: 1px solid #303039;
+      margin-top: 40px;
+    }
+    @media (max-width: 550px) {
+      header { padding: 20px 5%; }
+      nav a { margin-left: 0; margin-right: 12px; }
+      main, .hero { padding-left: 5%; padding-right: 5%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">KINO <span>XIT</span></div>
+    <nav>
+      <a href="#home">Главная</a>
+      <a href="#movies">Фильмы</a>
+      <a href="#about">О сайте</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <span class="tag">ТВОЙ МИР КИНО</span>
+    <h1>Кино начинается<br>с <span>Kino Xit</span></h1>
+    <p>Открывай интересные фильмы, знакомься с новинками и находи идеи для следующего киновечера.</p>
+  </section>
+
+  <main id="movies">
+    <div class="section-title">
+      <h2>🎬 Популярные фильмы</h2>
+      <input id="search" type="search" placeholder="Найти фильм..." aria-label="Поиск фильмов">
+    </div>
+
+    <div class="movies" id="movie-list">
+      <article class="movie" data-title="Бэтмен: Начало">
+        <div class="poster">BATMAN<br>НАЧАЛО</div>
+        <div class="movie-info">
+          <h3>Бэтмен: Начало</h3>
+          <p><span class="year">2005</span> · Боевик</p>
+          <p>История появления легендарного героя Готэма.</p>
+        </div>
+      </article>
+
+      <article class="movie" data-title="Малыш на драйве">
+        <div class="poster">МАЛЫШ<br>НА ДРАЙВЕ</div>
+        <div class="movie-info">
+          <h3>Малыш на драйве</h3>
+          <p><span class="year">2017</span> · Криминал</p>
+          <p>Музыка, скорость и опасные автомобильные погони.</p>
+        </div>
+      </article>
+
+      <article class="movie" data-title="Геошторм">
+        <div class="poster">ГЕОШТОРМ</div>
+        <div class="movie-info">
+          <h3>Геошторм</h3>
+          <p><span class="year">2017</span> · Фантастика</p>
+          <p>Мир сталкивается с масштабной климатической угрозой.</p>
+        </div>
+      </article>
+
+      <article class="movie" data-title="Без жалости">
+        <div class="poster">БЕЗ<br>ЖАЛОСТИ</div>
+        <div class="movie-info">
+          <h3>Без жалости</h3>
+          <p><span class="year">2021</span> · Боевик</p>
+          <p>Напряжённая история секретной операции.</p>
+        </div>
+      </article>
+    </div>
+    <p id="empty" class="empty" hidden>Фильм не найден. Попробуй другое название.</p>
+  </main>
+
+  <footer id="about">
+    <div class="logo">KINO <span>XIT</span></div>
+    <p>Твой мир кино · © 2026 Kino Xit</p>
+    <p>Информация о фильмах представлена для ознакомления.</p>
+  </footer>
+
+  <script>
+    const search = document.getElementById('search');
+    const movies = [...document.querySelectorAll('.movie')];
+    const empty = document.getElementById('empty');
+
+    search.addEventListener('input', () => {
+      const query = search.value.trim().toLocaleLowerCase('ru');
+      let count = 0;
+
+      movies.forEach(movie => {
+        const title = movie.dataset.title.toLocaleLowerCase('ru');
+        const visible = title.includes(query);
+        movie.hidden = !visible;
+        if (visible) count++;
+      });
+
+      empty.hidden = count !== 0;
+    });
+  </script>
+</body>
+</html>
